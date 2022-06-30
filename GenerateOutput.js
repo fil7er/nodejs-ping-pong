@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 export class GenerateOutput{
 
     memory;
@@ -8,9 +10,9 @@ export class GenerateOutput{
     }
 
 
-    toString() {console.log('pong '+this.counter); this.counter += 1;}
+    toString() {console.log('Ping / Pongs: '+this.counter); this.counter += 1; fs.appendFileSync('file/output.txt', 'Ping / Pongs: '+this.counter+'\n');}
 
-    toJSON() {return ['pong', this.counter]}
+    toJSON() {return ['Ping / Pongs:', this.counter]}
 
 
 }
