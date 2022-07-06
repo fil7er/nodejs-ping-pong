@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fil7er-nodejs-ping-pong-db
+  namespace: my-namespace
+spec:
+  selector:
+    matchLabels:
+      app: fil7er-nodejs-ping-pong-db
+  template:
+    metadata:
+      labels:
+        app: fil7er-nodejs-ping-pong-db
+    spec:
+      containers:
+      - name: fil7er-nodejs-ping-pong-db
+        image: postgres
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5432
+        env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: POSTGRES_PASSWORD
+                name: postgres-pass
