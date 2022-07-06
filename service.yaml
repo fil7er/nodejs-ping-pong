@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: fil7er-nodejs-ping-pong-svc
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: fil7er-nodejs-ping-pong
   ports:
     - name: http
-      nodePort: 30083 # This is the port that is available outside. Value for nodePort can be between 30000-32767
+      nodePort: 30001 # This is the port that is available outside. Value for nodePort can be between 30000-32767
       protocol: TCP
-      port: 1237 # This is a port that is available to the cluster, in this case it can be ~ anything
-      targetPort: 3000 # This is the target port
+      port: 3004 # This is a port that is available to the cluster, in this case it can be ~ anything
+      targetPort: 3002 # This is the target port
