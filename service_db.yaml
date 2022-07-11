@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: fil7er-nodejs-ping-pong-db-svc
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: fil7er-nodejs-ping-pong-db
   ports:

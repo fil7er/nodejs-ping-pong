@@ -17,8 +17,8 @@ server.listen(port, () => {
     output.outputOverTime(5000)
   })
 
-  app.get('/', (req, res) => {
-    
+  app.get('/pingpong', (req, res) => {
+
     conn.select().then((result) => {res.json(result)})
   })
 
