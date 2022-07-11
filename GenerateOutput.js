@@ -1,18 +1,22 @@
+import { json } from 'express/lib/response';
 import fs from 'fs';
+import { Connection } from './connect';
 
 export class GenerateOutput{
 
     memory;
     counter = 0;
 
+    conn = new Connection()
+
     outputOverTime(time){
         setInterval(() => this.toString(), time);
     }
 
 
-    toString() {console.log('Ping / Pongs: '+this.counter); this.counter += 1; fs.appendFileSync('file/output.txt', 'Ping / Pongs: '+this.counter+'\n');}
+    toString() { this.conn.insert(this.counter);  this.counter += 1;}
 
-    toJSON() {return ['Ping / Pongs:', this.counter]}
+    toJSON() {return json(this.conn.select())}
 
 
 }
