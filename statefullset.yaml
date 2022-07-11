@@ -1,14 +1,3 @@
-apiVersion: v1
-kind: Service
-metadata:
-  name: fil7er-nodejs-ping-pong-db-svc
-spec:
-  selector:
-    app: fil7er-nodejs-ping-pong-db
-  ports:
-  - port: 5432
-    targetPort: 5432
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -27,24 +16,12 @@ spec:
       containers:
       - name: fil7er-nodejs-ping-pong-db
         image: postgres
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 5432
           name: postgres-port
-          env:
+        env:
           - name: POSTGRES_PASSWORD
             valueFrom:
               secretKeyRef:
                 key: POSTGRES_PASSWORD
                 name: mysecret
-  volumeClaimTemplates:
-  - metadata:
-      name: data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 256Mi

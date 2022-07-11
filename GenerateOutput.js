@@ -1,6 +1,5 @@
-import { json } from 'express/lib/response';
 import fs from 'fs';
-import { Connection } from './connect';
+import { Connection } from './connect.js';
 
 export class GenerateOutput{
 
@@ -9,6 +8,12 @@ export class GenerateOutput{
 
     conn = new Connection()
 
+
+    constructor(){
+        this.conn.init();
+        
+    }
+
     outputOverTime(time){
         setInterval(() => this.toString(), time);
     }
@@ -16,7 +21,7 @@ export class GenerateOutput{
 
     toString() { this.conn.insert(this.counter);  this.counter += 1;}
 
-    toJSON() {return json(this.conn.select())}
+    async toJSON() { this.conn.select().then((result) => {return result;})}
 
 
 }

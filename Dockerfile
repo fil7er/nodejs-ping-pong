@@ -5,6 +5,6 @@ COPY . /home/node/app
 
 RUN npm install
 
-EXPOSE 3002
+EXPOSE 3005
 
 CMD [ "node", "index.js" ]

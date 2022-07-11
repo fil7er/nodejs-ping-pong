@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fil7er-nodejs-ping-pong-db-svc
+spec:
+  type: LoadBalancer
+  selector:
+    app: fil7er-nodejs-ping-pong-db
+  ports:
+  - port: 5432
+    targetPort: 5432
+    nodePort: 30014 # This is the port that is available outside. Value for nodePort can be between 30000-32767
+    protocol: TCP
